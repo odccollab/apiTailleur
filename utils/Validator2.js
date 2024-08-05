@@ -15,7 +15,7 @@ class Validation {
           'string.min': 'Le nom doit contenir au moins 1 caractère',
           'any.required': 'Le nom est requis'
         }),
-        otherwise: Joi.forbidden() // Interdit le champ 'name' pour la connexion
+
       }),
       prenom: Joi.string().required().messages({
         'string.base': 'Le prénom doit être une chaîne de caractères',

@@ -1,5 +1,6 @@
-{
+ {
     
+
     "mail":"2s@gmail.com",
     "password":"passer",
     "nom":"sss",
@@ -7,9 +8,13 @@
     "type":"tailleur",
     "passconfirm":"passer",
     "prenom":"dio"
+
+    "type":"tailleur"
 }
+
 {
-    
+
+
     "mail":"sss@gmail.com",
     "password":"passer"
     

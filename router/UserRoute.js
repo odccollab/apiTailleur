@@ -5,13 +5,24 @@ import Middleware from '../middlewares/TestMiddleware.js';
 import Validator from '../middlewares/ValidatorMiddleware.js';
 const router = express.Router();
 
+<<<<<<< HEAD
 
-router.post('/users',  UserController.createUser);
-router.get('/email/:email', UserController.findUserByEmail);
+router.post('/users', UserController.createUser);
+router.get('/email/:email',UserController.findUserByEmail);
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 router.post('/login2',Validator("login"), UserController.loginUser);
+ router.post('/login',UserController.loginUser);
+ router.post('/create',Validator("login"),  UserController2.createUser);
+
+=======
+router.post('/users',  UserController.createUser);
+router.get('/email/:email', UserController.findUserByEmail);
+
+
+router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/login', UserController.loginUser);
-router.post('/create',  UserController2.createUser);
+router.post('/create', Validator("register"), UserController2.createUser);
+>>>>>>> origin/main
 
 // Vous pouvez ajouter d'autres routes ici
 
