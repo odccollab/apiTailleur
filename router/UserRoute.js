@@ -18,6 +18,7 @@ router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/users',  UserController.createUser);
 router.get('/email/:email', UserController.findUserByEmail);
 
+
 router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/login', UserController.loginUser);
 router.post('/create', Validator("register"), UserController2.createUser);
