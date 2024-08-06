@@ -15,7 +15,9 @@ export default class Middleware {
             res.status(401).json({ error: 'Access denied, token is invalid' });
         }
     }
-    static whoru=(req,res,yokhl)=>{
+
+    
+    static test2=(req,res,yokhl)=>{
         try{
             
             console.log(console.log(req.user));
