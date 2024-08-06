@@ -18,6 +18,7 @@ router.get('/numberlike/:userId/:postId', PostController.getNumberLike);
 // router.post('/post/comment/:userId/:postId', PostController.addComment);
 // router.post('/post/like/:userId/:postId', PostController.addLike);
 
+
 // Nouvelles routes pour les commentaires
 router.post('/:postId/comment', CommentController.addComment);
 router.get('/:postId/comment', CommentController.getComments); 
