@@ -1,10 +1,12 @@
 {
     
-    "mail":"sss@gmail.com",
+    "mail":"2s@gmail.com",
     "password":"passer",
     "nom":"sss",
-    "telephone":2333333,
-    "type":"tailleur"
+    "telephone":233443333,
+    "type":"tailleur",
+    "passconfirm":"passer",
+    "prenom":"dio"
 }
 {
     

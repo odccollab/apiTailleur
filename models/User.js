@@ -1,5 +1,24 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+const notificationSchema = new Schema({
+  type: {
+    type: String,
+    required: true,
+  },
+  message: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  read: {
+    type: Boolean,
+    default: false,
+  },
+});
+
 
 const userSchema = new Schema({
   nom: {
@@ -15,7 +34,14 @@ const userSchema = new Schema({
     {
       idVoteur: { type: Schema.Types.ObjectId, ref: 'User' }
     }
-  ]
+  ],
+  followers: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ],
+  notifications: [notificationSchema]
 });
 
 const UserModel = mongoose.model('User', userSchema);
