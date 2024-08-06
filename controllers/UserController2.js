@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
-import Validator from '../utils/Validator.js'
+// import Validator from '../utils/Validator.js'
 export default class UserController2 {
 
 

@@ -1,4 +1,4 @@
-{
+ {
     
 
     "mail":"2s@gmail.com",
@@ -11,10 +11,11 @@
 
     "type":"tailleur"
 }
+
 {
 
 
-//     "mail":"sss@gmail.com",
-//     "password":"passer"
+    "mail":"sss@gmail.com",
+    "password":"passer"
     
 }

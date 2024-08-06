@@ -7,4 +7,6 @@ export default class Utils{
     static compPass(password, hashedPassword) {
         return bcrypt.compareSync(password, hashedPassword);
       }
+    
+      
 }

@@ -14,7 +14,7 @@ class UserController {
 
     if (!valid) return res.status(400).json({ errors });
 
-    let { nom, prenom, role, password, telephone, mail, passconfirm } = req.body;
+    let { nom, prenom, role, password, telephone, mail,passconfirm } = req.body;
     if (password !== passconfirm) {
       return res.status(400).send('Les mots de passe ne correspondent pas');
     }
