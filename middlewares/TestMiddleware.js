@@ -16,6 +16,7 @@ export default class Middleware {
         }
     }
     static whoru=(req,res,yokhl)=>{
+
         try{
             
             console.log(console.log(req.user));
