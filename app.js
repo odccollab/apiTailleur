@@ -10,10 +10,8 @@ const app = express();
 app.use(bodyParser.json());
 connectDB;
 
-
-
 app.use(express.json());
-app.use("/posts",postRoute);
+// app.use("/posts",postRoute);
 app.use("/users",userRoute);
 
 const PORT = process.env.PORT || 3000;
