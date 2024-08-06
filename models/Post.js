@@ -3,12 +3,13 @@ const { Schema } = mongoose;
 const postSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   contenu: String,
-  contenuMedia:[
-          {url :strings}
-      ],
+  contenuMedia: {
+    type: [String], // Tableau de chaînes de caractères
+    default: [],    // Par défaut, un tableau vide
+  },
   comments: [
     {
-      text :string,
+      text :String,
       createdAt: { type: Date, default: Date.now },
       updatedAt: { type: Date, default: Date.now },
       commenterId: { type: Schema.Types.ObjectId, ref: 'User' },

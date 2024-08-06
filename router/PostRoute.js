@@ -20,7 +20,7 @@ router.get('/numberlike/:userId/:postId', PostController.getNumberLike);
 
 // Nouvelles routes pour les commentaires
 router.post('/:postId/comment', CommentController.addComment);
-router.get('/:postId/comments', CommentController.getComments); 
+router.get('/:postId/comment', CommentController.getComments); 
 
 // Nouvelles routes pour les vues
 router.post('/:postId/view', ViewController.incrementViews);

@@ -56,5 +56,27 @@ class postController{
           res.status(500).send("Server Error");
         }
       }
+      static async createPost(req, res) {
+        const { contenu, contenuMedia } = req.body;
+    
+        try {
+          const user = await User.findById(req.id); // Supposons que req.user.id contient l'ID de l'utilisateur connecté
+          if (!user) {
+            return res.status(404).send("User not found");
+          }
+    
+          const post = await Post.create({
+            contenu,
+            userId: req.id,
+            createdAt: new Date(),
+            contenuMedia:contenuMedia
+          });
+    
+          res.json(post);
+        } catch (err) {
+          console.error(err.message);
+          res.status(500).send("Server Error");
+        }
+      }
 }
 export default postController;
