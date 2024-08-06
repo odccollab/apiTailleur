@@ -11,7 +11,7 @@
     "passconfirm":"passer",
     "prenom":"dio"
 
-    "type":"tailleur"
+    
 }
 
 

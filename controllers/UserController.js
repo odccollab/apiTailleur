@@ -21,7 +21,7 @@ class UserController {
     }
     password = UserController.hashPassword(password);
     try {
-      const user = await UserModel.create({
+      const user = await User.create({
         nom,
         prenom,
         role,
@@ -69,9 +69,17 @@ class UserController {
 
   static async loginUser(req, res) {
     const { mail, password } = req.body;
+    // console.log(password);
+    
+    if (!mail ||!password) {
+      return res.status(400).json({ message: 'Please provide both email and password' });
+    }
     try {
       const user = await User.findOne({ mail });
+      // console.log(user);
+      
       if (!user || !Utils.compPass(password, user.password)) {
+        
         return res.status(400).json({ message: 'Invalid credentials',password: Utils.compPass(password, user.password) });
       }
       const token = jwt.sign({ id: user._id,role:user.role }, process.env.SECRET_KEY, {
@@ -86,7 +94,7 @@ class UserController {
   static async addFollower(req, res) {
     const { userId, followerId } = req.body;
     try {
-      const user = await UserModel.findById(userId);
+      const user = await User.findById(userId);
       if (!user) {
         return res.status(404).send("User not found");
       }
@@ -94,7 +102,7 @@ class UserController {
       await user.save();
       res.json(user);
     } catch (err) {
-      console.error(err.message);
+      // console.error(err.message);
       res.status(500).send("Server Error");
     }
   }
@@ -102,7 +110,7 @@ class UserController {
   static async addNotification(req, res) {
     const { userId, notification } = req.body;
     try {
-      const user = await UserModel.findById(userId);
+      const user = await User.findById(userId);
       if (!user) {
         return res.status(404).send("User not found");
       }

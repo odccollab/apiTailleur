@@ -16,8 +16,8 @@ router.post('/login2',Validator("login"), UserController.loginUser);
 
 
 
-// Vous pouvez ajouter d'autres routes ici
 
+// Vous pouvez ajouter d'autres routes ici
 // router.get('/', UserController.getAllPosts);
 // router.post('/login', UserController.login);
 // router.post('/register', UserController.register);

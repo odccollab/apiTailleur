@@ -7,6 +7,8 @@ const postSchema = new Schema({
     type: [String], // Tableau de chaînes de caractères
     default: [],    // Par défaut, un tableau vide
   },
+
+
   comments: [
     {
       text :String,
