@@ -1,7 +1,6 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
-
 dotenv.config();
 export default class Middleware {
     static test = (req, res, next) => {
@@ -16,9 +15,10 @@ export default class Middleware {
             res.status(401).json({ error: 'Access denied, token is invalid' });
         }
     }
-    static change=(req,res,yokhl)=>{
+    static whoru=(req,res,yokhl)=>{
         try{
-            console.log("yokh2");
+            
+            console.log(console.log(req.user));
             // const token = req.headers.authorization.split(' ')[1];
             // jwt.verify(token,process.env.SECRET);
             yokhl();

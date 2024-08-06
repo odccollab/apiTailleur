@@ -2,19 +2,25 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
+import Validator from '../utils/Validator2.js'
 class UserController {
   static hashPassword(password) {
     return bcrypt.hashSync(password, 10);
   }
 
   static async createUser(req, res) {
-    let { nom, prenom, role, password, telephone, mail ,passconfirm} = req.body;
-    if (password!== passconfirm) {
-      return res.status(400).send('Passwords do not match');
+    let validate=new Validator()
+    const { valid, errors } = validate.validateUser(req.body);
+
+    if (!valid) return res.status(400).json({ errors });
+
+    let { nom, prenom, role, password, telephone, mail, passconfirm } = req.body;
+    if (password !== passconfirm) {
+      return res.status(400).send('Les mots de passe ne correspondent pas');
     }
-    password = Utils.hashPassword(password);
+    password = UserController.hashPassword(password);
     try {
-      const user = await User.create({
+      const user = await UserModel.create({
         nom,
         prenom,
         role,
@@ -25,7 +31,7 @@ class UserController {
       res.json(user);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server Error');
+      res.status(500).send('Erreur du serveur');
     }
   }
 
@@ -64,10 +70,10 @@ class UserController {
     const { mail, password } = req.body;
     try {
       const user = await User.findOne({ mail });
-      if (!user || Utils.compPass(password, user.password)) {
-        return res.status(400).json({ message: 'Invalid credentials' });
+      if (!user || !Utils.compPass(password, user.password)) {
+        return res.status(400).json({ message: 'Invalid credentials',password: Utils.compPass(password, user.password) });
       }
-      const token = jwt.sign({ id: user._id }, process.env.SECRET_KEY, {
+      const token = jwt.sign({ id: user._id,role:user.role }, process.env.SECRET_KEY, {
         expiresIn: '7h',
       });
       res.json({success:"connected", token });
@@ -76,8 +82,38 @@ class UserController {
       res.status(500).send('Server Error');
     }
   }
+  static async addFollower(req, res) {
+    const { userId, followerId } = req.body;
+    try {
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      user.followers.push(followerId);
+      await user.save();
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
 
-  // Ajoutez d'autres méthodes du contrôleur ici
+  static async addNotification(req, res) {
+    const { userId, notification } = req.body;
+    try {
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      user.notifications.push(notification);
+      await user.save();
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+
 }
 
 export default UserController;
