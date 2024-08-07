@@ -42,7 +42,13 @@ const userSchema = new Schema({
     }
   ],
   notifications: [notificationSchema],
-  favoris:[{type: Schema.Types.ObjectId, ref: 'Post'}]
+  favoris: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+  post: [// post represente les post partagés
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
   
 });
 
