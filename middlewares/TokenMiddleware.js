@@ -4,7 +4,6 @@ export default function verifyToken(){
     try {
         console.log("Verifying token...");
         const token = req.header("Authorization")?.replace('Bearer ', '');
-        console.log(token);
        
         if (!token) {
         return res.status(401).json({ error: 'No token provided' });
