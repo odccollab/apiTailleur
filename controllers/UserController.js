@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
 import Validator from '../utils/Validator2.js'
+import Post from '../models/Post.js';
 class UserController {
   static hashPassword(password) {
     return bcrypt.hashSync(password, 10);
@@ -113,6 +114,7 @@ class UserController {
       res.status(500).send("Server Error");
     }
   }
+  
 
 }
 
