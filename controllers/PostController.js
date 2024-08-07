@@ -1,5 +1,6 @@
 import User from '../models/User.js';
 import Post from '../models/Post.js';
+
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
@@ -27,6 +28,7 @@ class postController{
             return res.status(400).send("Vous avez déjà signalé ce post");
           }
         Post.signale.push({userId,motif});
+
           await post.save();
           res.json({message:"signaler avec succés",Data:post});
         } catch (err) {
