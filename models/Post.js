@@ -1,26 +1,44 @@
 const postSchema = new Schema({
-    name: String,
-    description: String,
-    price: Number,
-    quantity: Number,
-    userId: { type: Schema.Types.ObjectId, ref: 'User' },
-    comments: [
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  contenu: String,
+  contenuMedia:[
+          {url :strings}
+      ],
+  comments: [
+    {
+      text :string,
+      createdAt: { type: Date, default: Date.now },
+      updatedAt: { type: Date, default: Date.now },
+      commenterId: { type: Schema.Types.ObjectId, ref: 'User' },
+      
+    }
+  ],
+  likes: [
+    {
+      idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
+    }
+  ],
+  dislikes: [
       {
-        commenterId: { type: Schema.Types.ObjectId, ref: 'User' },
-        commenterNom: String,
-        commenterPrenom: String,
-        commenterTelephone: Number,
-        commenterMail: String
+        idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
-    likes: [
+  likesDislikes: [
       {
         type: String,
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
-    ]
-  });
-  
-  const Post = mongoose.model('Post', postSchema);
-  export default Post;
-  
+    ],
+  signale: [
+      {
+        motif: String,
+        idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
+      }
+    ],
+
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
+
+const Post = mongoose.model('Post', postSchema);
+export default Post;
