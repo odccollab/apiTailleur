@@ -42,6 +42,8 @@ const userSchema = new Schema({
     }
   ],
   notifications: [notificationSchema],
+
+  
   // post represente les post partagés
   post:[
     {
