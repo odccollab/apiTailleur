@@ -1,6 +1,20 @@
+<<<<<<< Updated upstream
 
  {
     
+=======
+{
+
+//     "mail":"2s@gmail.com",
+//     "password":"passer",
+//     "nom":"sss",
+//     "telephone":233443333,
+//     "type":"tailleur",
+//     "passconfirm":"passer",
+//     "prenom":"dio"
+// }
+// {
+>>>>>>> Stashed changes
 
     "mail":"2s@gmail.com",
     "password":"passer",
@@ -12,6 +26,7 @@
 
     "type":"tailleur"
 }
+<<<<<<< Updated upstream
 
 {
 
@@ -20,3 +35,5 @@
     "password":"passer"
     
 }
+=======
+>>>>>>> Stashed changes

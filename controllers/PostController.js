@@ -47,5 +47,23 @@ class postController{
           res.status(500).send("Server Error");
         }
       }
+      static async addlike(req, res){
+        const {postId} = req.params;
+        const {userId} = req.decoded;
+        try {
+            const post = await Post.findById(postId);
+            if (!post) {
+                return res.status(404).send("Post not found");
+            }
+            console.log(post);
+            Post.likes.push(userId);
+            await post.save();
+            res.json(post);
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).send("Server Error");
+        }
+
+    }
+
 }
-export default postController;

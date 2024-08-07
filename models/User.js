@@ -19,7 +19,6 @@ const notificationSchema = new Schema({
   },
 });
 
-
 const userSchema = new Schema({
   nom: {
     type: String,

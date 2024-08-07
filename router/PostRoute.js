@@ -1,13 +1,15 @@
 import express from 'express';
-import PostController from '../controllers/Post.js';
+import PostController from '../controllers/PostController.js';
+
 
 const router = express.Router();
-router.get('/', PostController.getAllPosts);
-router.get('/:id', PostController.getUserPosts);
-router.get('/:userId/:postId', PostController.getOneUserPost);
-router.get('/comment/:userId/:postId', PostController.getComment);
-router.get('/like/:userId/:postId', PostController.getLike);
-router.get('/numberlike/:userId/:postId', PostController.getNumberLike);
+router.post('/', PostController.createPost);
+router.post('/like', PostController.addlike);
+// router.get('/:id', PostController.getUserPosts);
+// router.get('/:userId/:postId', PostController.getOneUserPost);
+// router.get('/comment/:userId/:postId', PostController.getComment);
+// router.get('/like/:userId/:postId', PostController.getLike);
+// router.get('/numberlike/:userId/:postId', PostController.getNumberLike);
 // router.post('/post', PostController.createPost);
 // router.put('/post/:id', PostController.updatePost);
 // router.delete('/post/:id', PostController.deletePost);

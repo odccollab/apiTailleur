@@ -114,6 +114,34 @@ class UserController {
     }
   }
 
+
+// incrementer a chaque like
+addlike(user) {
+  const like = {
+    userId: this._id,
+    username: this.username,
+
+    createdAt: Date.now(),
+  };
+
+  this.likes.push(like);
+  this.save();
+}
+dislike(user) {
+  this.likes = this.likes.filter((like) => like.userId.toString()!== user._id.toString());
+  this.save();
 }
 
+followUser(user) {
+  const follow = {
+    userId: user._id,
+    username: user.username,
+    createdAt: Date.now(),
+  };
+  this.following.push(follow);
+  user.followers.push(this._id);
+  user.save();
+  this.save();
+}
+}
 export default UserController;
