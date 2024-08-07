@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Post from '../models/Post.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
@@ -6,20 +7,26 @@ import Validator from '../utils/Validator2.js'
 
 class postController{
     
-    //signaler un post post
+    //signaler un post postfindById
     static async signalPost(req, res) {
-        const { userId, motif } = req.body;
+        const { motif,postId } = req.body;
         try {
+
+        const userId=req.id;
+
           const user = await User.findById(userId);
           if (!user) {
-            return res.status(404).send("User not found");
+            return res.status(404).send("Vous n'etes pas connecté");
           }
-          const post = post.find((post) => post.id === postId);
+          const post = Post.find((post) => post.id === postId);
           if (!post) {
             return res.status(404).send("Post not found");
           }
-          post.signale++;
-          post.signale.push({userId,motif});
+
+          if (Post.signale.some((signalement) => signalement.userId === userId)) {
+            return res.status(400).send("Vous avez déjà signalé ce post");
+          }
+        Post.signale.push({userId,motif});
           await post.save();
           res.json({message:"signaler avec succés",Data:post});
         } catch (err) {
