@@ -41,7 +41,14 @@ const userSchema = new Schema({
       ref: 'User'
     }
   ],
-  notifications: [notificationSchema]
+  notifications: [notificationSchema],
+  // post represente les post partagés
+  post:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ]
 });
 
 const UserModel = mongoose.model('User', userSchema);
