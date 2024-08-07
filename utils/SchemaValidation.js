@@ -46,7 +46,20 @@ const validationSchemas = {
             'string.empty': 'Le mot de passe ne doit pas être vide'
           }),
          
+        }),
+        post: Joi.object({
+          contenu: Joi.string().required().messages({
+            'string.base': 'Le contenu doit être une chaîne de caractères',
+            'string.empty': 'Le contenu est obligatoire',
+            'any.required': 'Le champ contenu est requis'
+          }),
+          contenuMedia: Joi.array().items(Joi.string().uri().regex(/\.(jpeg|jpg|gif|png|mp4|mov)$/)).optional().messages({
+            'array.base': 'Le contenu média doit être un tableau',
+            'array.includes': 'Le contenu média doit contenir des URLs valides de vidéos ou d\'images'
+          }).default([])  // Default to an empty array if not provided
         })
+         
+
 
 };
 export default validationSchemas;

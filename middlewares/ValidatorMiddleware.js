@@ -3,7 +3,6 @@ import validationSchemas from "../utils/SchemaValidation.js";
 export default function validateData(key) {
 
     return (req, res, next) => {
-        console.log(req);
       const schema = validationSchemas[key];
       
       if (!schema) {

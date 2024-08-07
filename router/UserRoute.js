@@ -10,8 +10,8 @@ router.post('/users', UserController.createUser);
 router.get('/email/:email',UserController.findUserByEmail);
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 router.post('/login2',Validator("login"), UserController.loginUser);
- router.post('/login',UserController.loginUser);
- router.post('/create',Validator("login"),  UserController2.createUser);
+ router.post('/login',Middleware.Validate,UserController.loginUser);
+ router.post('/create',Validator("register"),  UserController2.createUser);
 
 
 // Vous pouvez ajouter d'autres routes ici
@@ -30,4 +30,4 @@ router.post('/login2',Validator("login"), UserController.loginUser);
 // router.post('/:userId/follow/:followerId', UserController.followUser);
 // router.delete('/:userId/unfollow/:followerId', UserController.unfollowUser);
 
-export default router;
+export default router;      
