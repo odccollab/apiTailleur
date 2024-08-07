@@ -13,7 +13,6 @@ export default function verifyToken(){
         const decoded = jwt.verify(token, process.env.SECRET_KEY);      
         console.log(decoded.id);
          req.id = decoded.id; // Vous pouvez utiliser req.userId si vous préférez
-        
         next();
     } catch (error) {
         res.status(401).json({ error: 'Access denied, token is invalid' });
