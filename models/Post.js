@@ -34,13 +34,15 @@ const postSchema = new Schema({
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
+ 
   signale: [
       {
         motif: String,
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
-
+    
+viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });

@@ -82,7 +82,9 @@ class UserController {
         
         return res.status(400).json({ message: 'Invalid credentials',password: Utils.compPass(password, user.password) });
       }
-      const token = jwt.sign({ id: user._id,role:user.role }, process.env.SECRET_KEY, {
+const SECRET_KEY ="d,fhjdhfjesrgfjshwgjfhugseyruyfqusdfkjqsdhfLIqdfslqsdhflqshkdfghkqsdhfkqhdSDGHSGDHGSHDHHSGDHSGDHGSHCHSGDH12345678908765432345"
+
+      const token = jwt.sign({ id: user._id,role:user.role }, SECRET_KEY, {
         expiresIn: '7h',
       });
       res.json({success:"connected", token });
