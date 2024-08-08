@@ -1,12 +1,15 @@
+import mongoose from "mongoose";
+const Schema = mongoose.Schema;
+
 const postSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   contenu: String,
   contenuMedia:[
-          {url :strings}
+          {url :String}
       ],
   comments: [
     {
-      text :string,
+      text :String,
       createdAt: { type: Date, default: Date.now },
       updatedAt: { type: Date, default: Date.now },
       commenterId: { type: Schema.Types.ObjectId, ref: 'User' },

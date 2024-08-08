@@ -2,6 +2,7 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
+import Post from '../models/Post.js';
 import Validator from '../utils/Validator2.js'
 
 class postController{
@@ -55,15 +56,25 @@ class postController{
             if (!post) {
                 return res.status(404).send("Post not found");
             }
-            console.log(post);
-            Post.likes.push(userId);
+         
+           //veririfier si userId est dans la table likes
+            if(post.likes.includes(userId)){
+                return res.status(400).send("vous avez déja liké ce post");
+            }else
+            console.log('breukh');
+            //si non, ajouter userId à la table likes
+            post.likes.push(userId);
             await post.save();
             res.json(post);
+            
         } catch (err) {
             console.error(err.message);
             res.status(500).send("Server Error");
         }
 
-    }
+       }
+      
+
 
 }
+export default postController;

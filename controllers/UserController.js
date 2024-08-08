@@ -82,7 +82,27 @@ class UserController {
       res.status(500).send('Server Error');
     }
   }
+  // add followers to the user and verify the userId in the table follower and unfollow them
   static async addFollower(req, res) {
+    const { userId, followerId } = req.body;
+    try {
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).send("User not found");
+      }
+      if(user.followers.includes(followerId)){
+        return res.status(400).send("vous avez déja suivi cet utilisateur");
+      }
+      user.followers.push(followerId);
+      await user.save();
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+    }
+  }
+
+/*   static async addFollower(req, res) {
     const { userId, followerId } = req.body;
     try {
       const user = await UserModel.findById(userId);
@@ -96,7 +116,7 @@ class UserController {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
-  }
+  } */
 
   static async addNotification(req, res) {
     const { userId, notification } = req.body;

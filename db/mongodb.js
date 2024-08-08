@@ -1,6 +1,9 @@
+
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
+
+
 
 class Database {
   constructor() {
@@ -8,7 +11,8 @@ class Database {
   }
 
   _connect() {
-    mongoose.connect(process.env.MONGO_URL1)
+    mongoose.connect(process.env.MONGO_URL)
+    
       .then(() => {
         console.log('Database connection successful');
       })
@@ -19,4 +23,5 @@ class Database {
 }
 
 export default new Database();
+
 

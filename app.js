@@ -11,10 +11,12 @@ app.use(bodyParser.json());
 connectDB;
 
 app.use(express.json());
-
+app.use("/users",userRoute);
+app.use("/follower",userRoute);
+app.use("/users",userRoute);
 app.use("/posts",postRoute);
 app.use("/+like",postRoute);
-app.use("/users",userRoute);
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

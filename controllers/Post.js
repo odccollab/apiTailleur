@@ -1,5 +1,4 @@
 import Post from "../models/PostRelease.js";
-
 export default class PostController {
     static getAllPosts(req, res) {
         try {

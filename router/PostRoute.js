@@ -1,10 +1,15 @@
 import express from 'express';
-import PostController from '../controllers/PostController.js';
+import postController from '../controllers/PostController.js';
+
 
 
 const router = express.Router();
-router.post('/', PostController.createPost);
-router.post('/like', PostController.addlike);
+//router.post('/', postController.createPost);
+
+router.post('/like', postController.addlike);
+
+export default router;
+
 // router.get('/:id', PostController.getUserPosts);
 // router.get('/:userId/:postId', PostController.getOneUserPost);
 // router.get('/comment/:userId/:postId', PostController.getComment);
@@ -15,4 +20,3 @@ router.post('/like', PostController.addlike);
 // router.delete('/post/:id', PostController.deletePost);
 // router.post('/post/comment/:userId/:postId', PostController.addComment);
 // router.post('/post/like/:userId/:postId', PostController.addLike);
-export default router;
