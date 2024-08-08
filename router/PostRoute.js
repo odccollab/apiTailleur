@@ -5,6 +5,9 @@ import verifyToken from '../middlewares/TokenMiddleware.js';
 import postController from '../controllers/PostController.js';
 
 
+import MiddlewareToken from  '../middlewares/TokenMiddleware.js';
+import Validator from '../middlewares/ValidatorMiddleware.js';
+import CanPost from '../middlewares/CanPostMiddleware.js';
 
 
 
@@ -35,4 +38,19 @@ router.put('/:postId/comment/:commentId', PostController.updateComment);
 
 
 
+
+router.post('/create',MiddlewareToken(),Validator("post"), CanPost(),PostController.createPost);
+router.post('/createStory',MiddlewareToken(),Validator("post"),CanPost(), PostController.createStory);
+router.get('/:type/:idpost',MiddlewareToken(), PostController.handleLikeDislike);
+// router.get('/postsc',MiddlewareToken(), PostController.allPost);
+// router.get('/posts', PostController.allPost);
+router.put('/:id',MiddlewareToken(),Validator("post"), PostController.modifyPost);
+router.delete('/:id',MiddlewareToken(), PostController.deletePost);
+router.get('/accueil',MiddlewareToken(),PostController.fileActu)
+
+router.post('/create',MiddlewareToken(),Validator("post"), PostController.createPost);
+router.post('/share', PostController.sharePost);
+router.post('/share/email', PostController.shareByEmail);
+router.post('/share/facebook', PostController.shareOnFacebook);
+router.post('/share/whatsapp', PostController.shareOnWhatsApp);
 export default router;

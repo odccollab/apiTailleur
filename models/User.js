@@ -18,15 +18,33 @@ const notificationSchema = new Schema({
     default: false,
   },
 });
-
-
+const messageSchema = new Schema({
+  sender: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  receiver: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
 const userSchema = new Schema({
   nom: {
     type: String,
     required: [true, "le champs est requis"]
   },
   prenom: String,
-  role: String,
+  type: String,
   password: String,
   telephone: { type: Number, unique: true },
   mail: { type: String, unique: true },
@@ -49,7 +67,12 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
-  
+  credits:{ type:Number,default:3},
+  sharedPosts: [{
+    type: Schema.Types.ObjectId, ref: 'Post'
+  }],
+  messages: [messageSchema],
+
 });
 
 const UserModel = mongoose.model('User', userSchema);
