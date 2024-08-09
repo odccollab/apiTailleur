@@ -9,7 +9,7 @@ import postController from '../controllers/PostController.js';
 
 
 const router = express.Router();
-router.get('/', PostController.getAllPosts);
+
 // router.get('/:id', PostController.getUserPosts);
 // router.get('/:userId/:postId', PostController.getOneUserPost);
 // router.get('/comment/:userId/:postId', PostController.getComment);
