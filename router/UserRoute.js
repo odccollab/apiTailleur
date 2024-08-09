@@ -15,7 +15,9 @@ router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/create',Validator("register"),  UserController2.createUser);
  router.post('/achatCredit', MiddlewareToken(), UserController.rechargerCompte);
  router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
-
+router.post('/favorite',token(), UserController2.manageFavorites);
+router.get('/favorite',token(), UserController2.getUserFavorites);
+router.post('/vote',token(), UserController2.manageVotes);
 
 router.get('/messages', Middleware.test, UserController.getMessages);
 // router.get('/messages/:userId', Middleware.test, UserController.getMessagesByUserId);
