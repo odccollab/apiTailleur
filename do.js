@@ -1,6 +1,6 @@
 // {
     
-<<<<<<< HEAD
+
 //     "mail":"2s@gmail.com",
 //     "password":"passer",
 //     "nom":"sss",
@@ -10,8 +10,7 @@
 //     "prenom":"dio"
 // }
 // {
-    
-=======
+
 
     "mail":"2s@gmail.com",
     "password":"passer",
@@ -25,7 +24,10 @@
 {
 
 
->>>>>>> f05d575 (sidi push)
+//     "mail":"sss@gmail.com",
+//     "password":"passer"
+    
+    
 //     "mail":"sss@gmail.com",
 //     "password":"passer"
     
