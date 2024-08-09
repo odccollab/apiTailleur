@@ -2,7 +2,10 @@ import express from 'express';
 import PostController from '../controllers/PostController.js';
 import MiddlewareToken from  '../middlewares/TokenMiddleware.js';
 import Validator from '../middlewares/ValidatorMiddleware.js';
+<<<<<<< HEAD
 import CanPost from '../middlewares/CanPostMiddleware.js';
+=======
+>>>>>>> 8da19c017a3707665997f79c565fafaec92c0519
 
 
 const router = express.Router();
@@ -27,4 +30,5 @@ router.put('/:id',MiddlewareToken(),Validator("post"), PostController.modifyPost
 router.delete('/:id',MiddlewareToken(), PostController.deletePost);
 router.get('/accueil',MiddlewareToken(),PostController.fileActu)
 
+router.post('/create',MiddlewareToken(),Validator("post"), PostController.createPost);
 export default router;

@@ -59,7 +59,8 @@ class postController{
         const { contenu, contenuMedia } = req.body;
     
         try {
-          const user = await User.findById(req.id); 
+
+          const user = await User.findById(req.id); // Supposons que req.user.id contient l'ID de l'utilisateur connecté
           if (!user) {
             return res.status(404).send("User not found");
           }
@@ -72,6 +73,7 @@ class postController{
           });
           user.credits -= 1;
           await user.save();
+
           res.json(post);
         } catch (err) {
           console.error(err.message);

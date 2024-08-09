@@ -76,5 +76,6 @@ const validationSchemas = {
       })
       .default([]), // Default to an empty array if not provided
   }),
+
 };
 export default validationSchemas;

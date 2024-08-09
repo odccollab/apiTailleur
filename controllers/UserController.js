@@ -3,7 +3,10 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
 import Validator from '../utils/Validator2.js'
+<<<<<<< HEAD
 import mongoose from 'mongoose';
+=======
+>>>>>>> 8da19c017a3707665997f79c565fafaec92c0519
 import Post from '../models/Post.js';
 class UserController {
   static hashPassword(password) {
@@ -151,6 +154,7 @@ if(amount<1000){
       console.error(err.message);
       res.status(500).send("Server Error");
   }
+<<<<<<< HEAD
 }
 
 static async ChangeEnTailleur(req, res) {
@@ -178,6 +182,8 @@ static async ChangeEnTailleur(req, res) {
       res.status(500).send("Server Error");
   }
 }
+=======
+>>>>>>> 8da19c017a3707665997f79c565fafaec92c0519
   
 
 }

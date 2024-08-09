@@ -17,6 +17,7 @@ router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
 
 
+
 // Vous pouvez ajouter d'autres routes ici
 
 // router.get('/', UserController.getAllPosts);
