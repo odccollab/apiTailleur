@@ -19,6 +19,7 @@ router.post('/users', UserController.createUser);
 router.get('/email/:email',UserController.findUserByEmail);
 router.post('/users',  UserController.createUser);
 router.get('/email/:email', UserController.findUserByEmail);
+
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 
 router.post('/login2',Validator("login"), UserController.loginUser);
@@ -42,6 +43,14 @@ router.get('/favorite',token(), UserController2.getUserFavorites);
 router.post('/vote',token(), UserController2.manageVotes);
 
 
+router.post('/login',UserController.loginUser);
+router.post('/create',Validator("register"),  UserController2.createUser);
+
+
+router.post('/favorite',token(), UserController2.manageFavorites);
+router.get('/favorite',token(), UserController2.getUserFavorites);
+router.post('/vote',token(), UserController2.manageVotes);
+
 
 // Vous pouvez ajouter d'autres routes ici
 // router.get('/', UserController.getAllPosts);
@@ -57,6 +66,7 @@ router.post('/vote',token(), UserController2.manageVotes);
 // router.post('/:userId/posts/:postId/like', UserController.makeLike);
 // router.post('/:userId/follow/:followerId', UserController.followUser);
 // router.delete('/:userId/unfollow/:followerId', UserController.unfollowUser);
+
 
 
 
