@@ -18,4 +18,8 @@ const router = express.Router();
 // router.post('/post/comment/:userId/:postId', PostController.addComment);
 // router.post('/post/like/:userId/:postId', PostController.addLike);
 router.post('/create',MiddlewareToken(),Validator("post"), PostController.createPost);
+router.post('/share', PostController.sharePost);
+router.post('/share/email', PostController.shareByEmail);
+router.post('/share/facebook', PostController.shareOnFacebook);
+router.post('/share/whatsapp', PostController.shareOnWhatsApp);
 export default router;
