@@ -5,19 +5,14 @@ import Middleware from '../middlewares/TestMiddleware.js';
 import Validator from '../middlewares/ValidatorMiddleware.js';
 import token from '../middlewares/TokenMiddleware.js';
 import MiddlewareToken from '../middlewares/TokenMiddleware.js';
+
 const router = express.Router();
-<<<<<<< HEAD
-=======
 
-<<<<<<< HEAD
 
->>>>>>> 2e42a8d (dame push)
+
 router.post('/users', UserController.createUser);
 router.get('/email/:email',UserController.findUserByEmail);
-=======
-router.post('/users',  UserController.createUser);
-router.get('/email/:email', UserController.findUserByEmail);
->>>>>>> f05d575 (sidi push)
+
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 
 router.post('/login2',Validator("login"), UserController.loginUser);
@@ -39,7 +34,12 @@ router.post('/messages', Middleware.test, UserController.sendMessage);
 router.get('/messages/search', Middleware.test, UserController.searchMessages);
 
 
+router.post('/login',UserController.loginUser);
+router.post('/create',Validator("register"),  UserController2.createUser);
 
+router.post('/favorite',token(), UserController2.manageFavorites);
+router.get('/favorite',token(), UserController2.getUserFavorites);
+router.post('/vote',token(), UserController2.manageVotes);
 
 
 // Vous pouvez ajouter d'autres routes ici
@@ -58,3 +58,4 @@ router.get('/messages/search', Middleware.test, UserController.searchMessages);
 // router.delete('/:userId/unfollow/:followerId', UserController.unfollowUser);
 
 export default router;      
+

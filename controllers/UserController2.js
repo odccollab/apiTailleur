@@ -10,17 +10,9 @@ export default class UserController2 {
 
   static async createUser(req, res) {
 
-    
 
         let { nom, prenom, type, password, telephone, mail, passconfirm } = req.body;
 
-        
-        if (password!== passconfirm) {
-            return res.status(400).send('Les mots de passe ne correspondent pas');
-        }
-        let credits=3;
-        if(type=="tailleur")
-            credits=10;
 
         password = Utils.hashPassword(password);
         try {
@@ -39,7 +31,28 @@ export default class UserController2 {
             res.status(500).send('Erreur du serveur');
     }
    
+  
+
+    if (password !== passconfirm) {
+      return res.status(400).send('Les mots de passe ne correspondent pas');
+    }
+    password = Utils.hashPassword(password);
+    try {
+      const user = await User.create({
+        nom,
+        prenom,
+        role,
+        password,
+        telephone,
+        mail,
+      });
+      res.json(user);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Erreur du serveur');
+    }
   }
+
   //---------------------------------------favoris-----------------------------------------
   static async manageFavorites(req, res) {
     const { postId } = req.body;
