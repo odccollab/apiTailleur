@@ -21,8 +21,13 @@ export default class Middleware {
         try{
             
             console.log(console.log(req.user));
+<<<<<<< HEAD
             // const token = req.headers.authorization.split(' ')[1];
             // jwt.verify(token,process.env.SECRET);
+=======
+            const token = req.headers.authorization.split(' ')[1];
+            jwt.verify(token,process.env.SECRET);
+>>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
             yokhl();
         }catch(error){
             res.status(401).json({error: 'Access denied, token is invalid'});

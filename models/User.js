@@ -18,7 +18,30 @@ const notificationSchema = new Schema({
     default: false,
   },
 });
+<<<<<<< HEAD
 
+=======
+const messageSchema = new Schema({
+  sender: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  receiver: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+});
+>>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
 
 const userSchema = new Schema({
   nom: {
@@ -43,12 +66,20 @@ const userSchema = new Schema({
   ],
   notifications: [notificationSchema],
   favoris: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
+<<<<<<< HEAD
   post: [// post represente les post partagés
     {
       type: Schema.Types.ObjectId,
       ref: 'Post'
     }
   ],
+=======
+  sharedPosts: [{
+    type: Schema.Types.ObjectId, ref: 'Post'
+  }],
+  messages: [messageSchema],
+
+>>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
   
 });
 

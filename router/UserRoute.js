@@ -13,6 +13,10 @@ router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/login',Middleware.Validate,UserController.loginUser);
  router.post('/create',Validator("register"),  UserController2.createUser);
 
+router.get('/messages', Middleware.test, UserController.getMessages);
+// router.get('/messages/:userId', Middleware.test, UserController.getMessagesByUserId);
+router.post('/messages', Middleware.test, UserController.sendMessage);
+router.get('/messages/search', Middleware.test, UserController.searchMessages);
 
 // Vous pouvez ajouter d'autres routes ici
 
