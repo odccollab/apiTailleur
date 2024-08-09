@@ -21,6 +21,14 @@ router.post('/vote',token(), UserController2.manageVotes);
  router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
 
 
+
+router.get('/messages', Middleware.test, UserController.getMessages);
+// router.get('/messages/:userId', Middleware.test, UserController.getMessagesByUserId);
+router.post('/messages', Middleware.test, UserController.sendMessage);
+router.get('/messages/search', Middleware.test, UserController.searchMessages);
+
+
+
 // Vous pouvez ajouter d'autres routes ici
 // router.get('/', UserController.getAllPosts);
 // router.post('/login', UserController.login);
