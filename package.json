@@ -21,16 +21,9 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
-<<<<<<< HEAD
-=======
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.14",
     "socket.io": "^4.7.5",
-<<<<<<< HEAD
->>>>>>> 170e9ea (Dev diop (#15))
-=======
-
->>>>>>> 2e42a8d (dame push)
     "zod": "^3.23.8"
   }
 }
