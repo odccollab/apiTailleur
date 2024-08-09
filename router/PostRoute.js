@@ -38,7 +38,6 @@ router.put('/:postId/comment/:commentId', PostController.updateComment);
 
 
 
->>>>>>> ae17cf8 (Dev diary (#16))
 
 router.post('/create',MiddlewareToken(),Validator("post"), CanPost(),PostController.createPost);
 router.post('/createStory',MiddlewareToken(),Validator("post"),CanPost(), PostController.createStory);
