@@ -53,4 +53,6 @@ router.post('/share', PostController.sharePost);
 router.post('/share/email', PostController.shareByEmail);
 router.post('/share/facebook', PostController.shareOnFacebook);
 router.post('/share/whatsapp', PostController.shareOnWhatsApp);
+ router.post('/signale',verifyToken(), PostController.signalPost);
+ router.get('/find', PostController.findUserOrPost);
 export default router;
