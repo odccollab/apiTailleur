@@ -14,6 +14,7 @@ export default class UserController2 {
 
     if (password !== passconfirm) {
       return res.status(400).send('Les mots de passe ne correspondent pas');
+
     }
     password = Utils.hashPassword(password);
     try {
