@@ -18,9 +18,6 @@ const notificationSchema = new Schema({
     default: false,
   },
 });
-<<<<<<< HEAD
-
-=======
 const messageSchema = new Schema({
   sender: {
     type: Schema.Types.ObjectId,
@@ -41,15 +38,13 @@ const messageSchema = new Schema({
     default: Date.now,
   },
 });
->>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
-
 const userSchema = new Schema({
   nom: {
     type: String,
     required: [true, "le champs est requis"]
   },
   prenom: String,
-  role: String,
+  type: String,
   password: String,
   telephone: { type: Number, unique: true },
   mail: { type: String, unique: true },
@@ -66,21 +61,18 @@ const userSchema = new Schema({
   ],
   notifications: [notificationSchema],
   favoris: [{ type: Schema.Types.ObjectId, ref: 'Post' }],
-<<<<<<< HEAD
   post: [// post represente les post partagés
     {
       type: Schema.Types.ObjectId,
       ref: 'Post'
     }
   ],
-=======
+  credits:{ type:Number,default:3},
   sharedPosts: [{
     type: Schema.Types.ObjectId, ref: 'Post'
   }],
   messages: [messageSchema],
 
->>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
-  
 });
 
 const UserModel = mongoose.model('User', userSchema);
