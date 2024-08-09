@@ -6,8 +6,18 @@ import Validator from '../middlewares/ValidatorMiddleware.js';
 import token from '../middlewares/TokenMiddleware.js';
 import MiddlewareToken from '../middlewares/TokenMiddleware.js';
 const router = express.Router();
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+
+>>>>>>> 2e42a8d (dame push)
 router.post('/users', UserController.createUser);
 router.get('/email/:email',UserController.findUserByEmail);
+=======
+router.post('/users',  UserController.createUser);
+router.get('/email/:email', UserController.findUserByEmail);
+>>>>>>> f05d575 (sidi push)
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/login',UserController.loginUser);
