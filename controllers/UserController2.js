@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import Post from '../models/Post.js';
 import Utils from '../utils/utils.js';
+
 // import Validator from '../utils/Validator.js'
 export default class UserController2 {
 
