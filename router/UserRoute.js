@@ -3,6 +3,7 @@ import  UserController from "../controllers/UserController.js";
 import UserController2 from "../controllers/UserController2.js";
 import Middleware from '../middlewares/TestMiddleware.js';
 import Validator from '../middlewares/ValidatorMiddleware.js';
+import MiddlewareToken from '../middlewares/TokenMiddleware.js';
 const router = express.Router();
 
 
@@ -12,6 +13,8 @@ router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByE
 router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/login',Middleware.Validate,UserController.loginUser);
  router.post('/create',Validator("register"),  UserController2.createUser);
+ router.post('/achatCredit', MiddlewareToken(), UserController.rechargerCompte);
+ router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
 
 
 // Vous pouvez ajouter d'autres routes ici

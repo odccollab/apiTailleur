@@ -26,7 +26,7 @@ const userSchema = new Schema({
     required: [true, "le champs est requis"]
   },
   prenom: String,
-  role: String,
+  type: String,
   password: String,
   telephone: { type: Number, unique: true },
   mail: { type: String, unique: true },
@@ -49,6 +49,7 @@ const userSchema = new Schema({
       ref: 'Post'
     }
   ],
+  credits:{ type:Number,default:3}
   
 });
 

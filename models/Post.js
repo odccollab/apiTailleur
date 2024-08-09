@@ -28,7 +28,7 @@ const postSchema = new Schema({
     ],
   likesDislikes: [
       {
-        type: String,
+        type: { type: String, enum: ['like', 'dislike', 'neutre'] },
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
@@ -41,6 +41,8 @@ const postSchema = new Schema({
 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
+  viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  expireAt: { type: Date,default:null },
 });
 
 const Post = mongoose.model('Post', postSchema);
