@@ -12,52 +12,98 @@ import nodemailer from 'nodemailer';
 
 class postController{
     
-    static async signalPost(req, res) {
-        const { motif,postId } = req.body;
+        static async signalPost(req, res) {
+          const { motif,postId } = req.body;
         try {
-          
-        const userId=req.id;
+          if(motif === '' || postId === ''){
+            return res.status(400).send('Veuillez remplir tous les champs');
+          }
+            //verifier si l'utilisateur s'est connecté
+            const userId=req.id;
+            const user = await User.findById(userId);
+         
+            if (!user) {
+                return res.status(404).send("Vous n'etes pas connecté");
+            }
+            
+            //verifier l'existence du post
+            const post = await Post.findById({_id:postId});
+            if (!post) {
+              return res.status(404).send("Post non trouvé");
+            }
+            //verifier si l'utilisateur a dèjà signalé le post
+            if (post.signale.some((signalement) => signalement.idLikerD.toString() === userId)) {
+              return res.status(400).send("Vous avez déjà signalé ce post");
+            }
 
-          const user = await User.findById(userId);
-          if (!user) {
-            return res.status(404).send("Vous n'etes pas connecté");
-          }
-          const post = Post.find((post) => post.id === postId);
-          if (!post) {
-            return res.status(404).send("Post not found");
-          }
 
-          if (Post.signale.some((signalement) => signalement.userId === userId)) {
-            return res.status(400).send("Vous avez déjà signalé ce post");
-          }
-        Post.signale.push({userId,motif});
+
+            post.signale.push({ idLikerD: userId, motif });
+
+            UserController.addNotification(userId,
+             { message: "votre post a été signalé",
+              type: "post",
+              idPost:postId,
+              date: new Date() 
+            });
+            // Vérifier si le nombre de signalements dépasse 5
+            if (post.signale.length > 2) {
+              await Post.deleteOne({ _id: postId });
+              UserController.addNotification(userId,
+               { message: "Votre post a été supprimé en raison de trop de signalements",
+                 type: "post",
+                 idPost:postId,
+                 date: new Date() 
+              })
+              return res.json({ message: "Post supprimé en raison de trop de signalements" });
+            }
 
           await post.save();
-          res.json({message:"signaler avec succés",Data:post});
+          res.json({message:"Post signalé avec succés",Data:post});
         } catch (err) {
           console.error(err.message);
           res.status(500).send("Server Error");
         }
-      }
+    }
 
+      //rechercher un user ou un post
       static async findUserOrPost(req, res) {
-        const { id } = req.params;
-        try {   
-          const user = await User.findById(id);
-          if (user) {
-            return res.json(user);
-          }
-          const post = await Post.findById(id);
-          if (post) {
-            return res.json(post);
-          }
-          res.status(404).send("User or Post not found");
-
-        } catch (err) {
-          console.error(err.message);
-          res.status(500).send("Server Error");
+        try {
+            const { value } = req.body; 
+          
+            if (!value) {
+                return res.status(400).json({ message: 'Veuillez entrer une valeur de recherche' });
+            }
+            
+            let users, posts;
+            
+            // Recherche des utilisateurs par nom, prénom ou email
+            users = await User.find({
+                $or: [
+                      { nom: { $regex: value, $options: 'i' } },
+                      { prenom: { $regex: value, $options: 'i' } },
+                      { mail: { $regex: value, $options: 'i' } }
+                    ]
+            });
+            
+            // Recherche des posts par contenu
+            posts = await Post.find({
+                contenu: { $regex: value, $options: 'i' }
+            });
+            
+            if (users.length === 0 && posts.length === 0) {
+                return res.status(404).json({ message: 'Aucun résultat trouvé', Data: null });
+            }
+            
+            res.json({
+                message: 'Résultats trouvés',
+                users: users,
+                posts: posts
+            });
+        } catch (error) {
+            res.status(500).json({ message: error.message });
         }
-      }
+    }
       static async createPost(req, res) {
         const { contenu, contenuMedia } = req.body;
     
