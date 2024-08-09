@@ -28,10 +28,7 @@ const io = new Server(server, {
 });
 
 
-<<<<<<< HEAD
-=======
-app.use(express.json());
->>>>>>> 2e42a8d (dame push)
+
 app.use("/posts",postRoute);
 app.use("/users",userRoute);
 

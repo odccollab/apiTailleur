@@ -11,7 +11,9 @@ export default class UserController2 {
   static async createUser(req, res) {
 
     
+
         let { nom, prenom, type, password, telephone, mail, passconfirm } = req.body;
+
         
         if (password!== passconfirm) {
             return res.status(400).send('Les mots de passe ne correspondent pas');

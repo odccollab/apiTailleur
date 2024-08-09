@@ -15,7 +15,6 @@ class Validation {
           'string.min': 'Le nom doit contenir au moins 1 caractère',
           'any.required': 'Le nom est requis'
         }),
-
       }),
       prenom: Joi.string().required().messages({
         'string.base': 'Le prénom doit être une chaîne de caractères',

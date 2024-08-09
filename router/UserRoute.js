@@ -19,6 +19,7 @@ router.post('/users',  UserController.createUser);
 router.get('/email/:email', UserController.findUserByEmail);
 >>>>>>> f05d575 (sidi push)
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
+
 router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/login',UserController.loginUser);
 router.post('/create',Validator("register"),  UserController2.createUser);
@@ -36,6 +37,7 @@ router.get('/messages', Middleware.test, UserController.getMessages);
 // router.get('/messages/:userId', Middleware.test, UserController.getMessagesByUserId);
 router.post('/messages', Middleware.test, UserController.sendMessage);
 router.get('/messages/search', Middleware.test, UserController.searchMessages);
+
 
 
 
