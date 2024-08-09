@@ -14,6 +14,7 @@ export default class UserController2 {
         let { nom, prenom, type, password, telephone, mail, passconfirm } = req.body;
 
 
+
         password = Utils.hashPassword(password);
         try {
             const user = await User.create({

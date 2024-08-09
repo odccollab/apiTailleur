@@ -26,3 +26,19 @@ export default class Middleware {
         }
     }
 }
+    static Validate=(req,res,yokhl)=>{
+
+        try{
+            
+            const urlSegments = req.path.split('/').filter(segment => segment);
+            const key = urlSegments[urlSegments.length - 1];
+            console.log(key+"Schema");
+            console.log(req.body);
+            let error = Validation.validate(req.body, key);
+            console.log(error);
+          
+        }catch(error){
+            res.status(401).json({error});
+        }
+    }
+
