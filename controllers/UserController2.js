@@ -11,6 +11,7 @@ export default class UserController2 {
   static async createUser(req, res) {
 
 
+
     let { nom, prenom, role, password, telephone, mail, passconfirm } = req.body;
 
     if (password !== passconfirm) {

@@ -21,6 +21,7 @@ router.post('/vote',token(), UserController2.manageVotes);
 
 
 
+
 // Vous pouvez ajouter d'autres routes ici
 
 // router.get('/', UserController.getAllPosts);
