@@ -8,10 +8,11 @@ const router = express.Router();
 
 router.post('/users',  UserController.createUser);
 router.get('/email/:email', UserController.findUserByEmail);
-router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
+
 router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/login',UserController.loginUser);
  router.post('/create',Validator("login"),  UserController2.createUser);
+
 
 
 
