@@ -3,12 +3,15 @@ import  UserController from "../controllers/UserController.js";
 import UserController2 from "../controllers/UserController2.js";
 import Middleware from '../middlewares/TestMiddleware.js';
 import Validator from '../middlewares/ValidatorMiddleware.js';
+import verifyToken from '../middlewares/TokenMiddleware.js';
 const router = express.Router();
 
 
 router.post('/login2',Validator("login"), UserController.loginUser);
 router.post('/users', UserController.createUser);
-router.get('/followers', UserController.addFollower);
+router.post('/follow',verifyToken(), UserController.addFollower);
+router.get('/followers', verifyToken(),UserController.getFollowers);
+router.get('/followings',verifyToken(),UserController.getFollowings);
 router.get('/email/:email',UserController.findUserByEmail);
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 

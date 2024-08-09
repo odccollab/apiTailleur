@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
 import Validator from '../utils/Validator2.js'
+import mongoose from 'mongoose';
 class UserController {
   static hashPassword(password) {
     return bcrypt.hashSync(password, 10);
@@ -82,41 +83,111 @@ class UserController {
       res.status(500).send('Server Error');
     }
   }
-  // add followers to the user and verify the userId in the table follower and unfollow them
+//  follow and unfollow methods
+
   static async addFollower(req, res) {
-    const { userId, followerId } = req.body;
+    const {  followedId } = req.body;
+    //import mongoose
+    if (!mongoose.Types.ObjectId.isValid(followedId)){
+      return res.status(400).send({ error: 'Invalid followedId' });
+    }
+
     try {
-      const user = await User.findById(userId);
-      if (!user) {
-        return res.status(404).send("User not found");
+      const userconected = await User.findById(req.id);
+      const userToFollow = await User.findById(followedId);
+      
+      if (!userconected ) {
+        return res.status(404).send("User connected not found");
       }
-      if(user.followers.includes(followerId)){
-        return res.status(400).send("vous avez déja suivi cet utilisateur");
+      if(!userToFollow){
+        return res.status(404).send("User to follow not found");
+
       }
-      user.followers.push(followerId);
-      await user.save();
-      res.json(user);
+       if(followedId==req.id){
+       return res.status(400).send("vous ne pouvez pas vous suivre vous-même");
+     }
+     
+      if(userToFollow.followers.includes(req.id)){
+        
+        const index = userToFollow.followers.indexOf(req.id);
+        if (index > -1) {
+          userToFollow.followers.splice(index, 1);
+        }
+        await userToFollow.save();
+        return res.status(400).send("vous avez arretez de suivre cet utilisateur");
+
+      }
+      userToFollow.followers.push(req.id);
+      // userToFollow.followers.push(followedId);
+      await userToFollow.save();
+      res.json(userToFollow);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
     }
   }
-
-/*   static async addFollower(req, res) {
-    const { userId, followerId } = req.body;
-    try {
-      const user = await UserModel.findById(userId);
-      if (!user) {
-        return res.status(404).send("User not found");
-      }
-      user.followers.push(followerId);
-      await user.save();
-      res.json(user);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
+  //  methode qui affiche les followers d'un user
+  static async getFollowers(req, res) {
+    const userconected = await User.findById(req.id);
+    if (req.role != 'tailleur') {
+      return res.status(403).json({ message: 'Vous devez être un tailleur avoir des followers' });
     }
-  } */
+    if (!userconected) {
+      return res.status(404).send("User connected not found");
+    }
+    //  console.log(req.id);
+    // console.log(userconected.followers);
+    // ici on affiche les followers de l'utilisateur connecté
+    // ici on affiche les followers de l'utilisateur connecté avec leur nom et prénom
+    const followers = await Promise.all(
+      userconected.followers.map(async (followerId) => {
+        const follower = await User.findById(followerId);
+        if (follower) {
+          return {
+            _id: follower._id,
+            nom: follower.nom,
+            prenom: follower.prenom,
+            photo: follower.photo
+          };
+        }
+      })
+    );
+    return res.json(followers);
+   
+  }
+  //  methode qui affiche les followings d'un user
+  static async getFollowings(req, res) {
+    try {
+      const userconected = await User.findById(req.id);
+      if (!userconected) {
+        return res.status(404).send("User connected not found");
+      }
+  
+      // Ensure 'following' is an array or provide an empty array as default
+      const followingList = userconected.following || [];
+      const followings = [];
+  
+      // Loop through each followingId and fetch the corresponding user details
+      for (let i = 0; i < followingList.length; i++) {
+        const followingId = followingList[i];
+        const following = await User.findById(followingId);
+        
+        if (following) {
+          followings.push({
+            _id: following._id,
+            nom: following.nom,
+            prenom: following.prenom,
+            photo: following.photo
+          });
+        }
+      }
+  
+      return res.json(followings);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  }
+  
 
   static async addNotification(req, res) {
     const { userId, notification } = req.body;
