@@ -9,6 +9,7 @@ export default function validateData(key) {
       if (!schema) {
         return res.status(400).json({ error:" No validation schema found for key: " +key});
       }
+      console.log(req.id,"iiiiz");
       
       const { error, value } = schema.validate(req.body);
   

@@ -3,6 +3,9 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import  Utils  from '../utils/utils.js';
 import Validator from '../utils/Validator2.js'
+
+import mongoose from 'mongoose';
+import Post from '../models/Post.js';
 class UserController {
   static hashPassword(password) {
     return bcrypt.hashSync(password, 10);
@@ -97,22 +100,107 @@ class UserController {
       res.status(500).send("Server Error");
     }
   }
+  
 
-  static async addNotification(req, res) {
-    const { userId, notification } = req.body;
+  static async addNotification(userId, notification) {
     try {
       const user = await UserModel.findById(userId);
       if (!user) {
         return res.status(404).send("User not found");
       }
+      const user = await User.findById(userId);
       user.notifications.push(notification);
       await user.save();
-      res.json(user);
+      return user;
     } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
+      console.error("jsjsdh");
     }
   }
+
+
+  // Méthode pour suivre ou ne plus suivre un utilisateur
+  static async handleFollowUnfollow(req, res) {
+    const { id } = req.params;  
+    const userId = req.id; 
+
+    try {
+        const userToFollow = await User.findById(id);  // Utilisateur à suivre
+
+        if (!userToFollow) {
+            return res.status(404).send("User not found");
+        }
+
+        const isFollowing = userToFollow.followers.includes(userId);
+
+        if (isFollowing) {
+            // Si l'utilisateur suit déjà, on le retire de la liste des followers
+            userToFollow.followers = userToFollow.followers.filter(followerId => followerId.toString() !== userId);
+        } else {
+            // Sinon, on ajoute l'utilisateur à la liste des followers
+            userToFollow.followers.push(userId);
+        }
+
+        await userToFollow.save();  // Enregistrement des changements
+
+        res.json({ followers: userToFollow.followers });
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+}
+static async rechargerCompte(req, res) {
+  const { amount } = req.body;  
+  const userId = req.id;  
+if(amount<1000){
+  return res.status(400).send("Le montant doit être supérieur ou égal à 1000");
+}
+  try {
+      const user = await User.findById(userId);
+      if (!user) {
+          return res.status(404).send("User not found");
+      }
+
+      const creditsToAdd = Math.floor(amount / 1000);
+
+      user.credits += creditsToAdd;
+
+      await user.save();
+
+      res.json({ success: true, credits: user.credits });
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+  }
+
+}
+
+static async ChangeEnTailleur(req, res) {
+  const userId = req.id;
+
+  try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+          return res.status(404).send("User not found");
+      }
+
+      if (user.credits < 10) {
+          return res.status(400).send("Insufficient credits to upgrade to Tailleur");
+      }
+
+      user.credits -= 10;
+      user.type = 'tailleur';
+
+      await user.save();
+
+      res.json({ message: "Account upgraded to Tailleur", credits: user.credits });
+  } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
+  }
+}
+
+  
 
 }
 
