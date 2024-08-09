@@ -38,6 +38,11 @@ const postSchema = new Schema({
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
+<<<<<<< HEAD
+=======
+ 
+  
+>>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
 
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

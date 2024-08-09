@@ -23,6 +23,8 @@ export default class Middleware {
             console.log(console.log(req.user));
             // const token = req.headers.authorization.split(' ')[1];
             // jwt.verify(token,process.env.SECRET);
+            const token = req.headers.authorization.split(' ')[1];
+            jwt.verify(token,process.env.SECRET);
             yokhl();
         }catch(error){
             res.status(401).json({error: 'Access denied, token is invalid'});

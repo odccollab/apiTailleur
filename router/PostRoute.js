@@ -31,4 +31,8 @@ router.delete('/:id',MiddlewareToken(), PostController.deletePost);
 router.get('/accueil',MiddlewareToken(),PostController.fileActu)
 
 router.post('/create',MiddlewareToken(),Validator("post"), PostController.createPost);
+router.post('/share', PostController.sharePost);
+router.post('/share/email', PostController.shareByEmail);
+router.post('/share/facebook', PostController.shareOnFacebook);
+router.post('/share/whatsapp', PostController.shareOnWhatsApp);
 export default router;
