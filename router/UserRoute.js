@@ -14,6 +14,7 @@ const router = express.Router();
 
 
 
+
 router.post('/users', UserController.createUser);
 router.get('/email/:email',UserController.findUserByEmail);
 router.post('/users',  UserController.createUser);
