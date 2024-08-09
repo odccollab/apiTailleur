@@ -524,24 +524,7 @@ class postController{
   }
 
   //rechercher un user ou un post
-  static async findUserOrPost(req, res) {
-    const { id } = req.params;
-    try {
-      const user = await User.findById(id);
-      if (user) {
-        return res.json(user);
-      }
-      const post = await Post.findById(id);
-      if (post) {
-        return res.json(post);
-      }
-      res.status(404).send("User or Post not found");
 
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send("Server Error");
-    }
-  }
   static async createPost(req, res) {
     const { contenu, contenuMedia } = req.body;
 
