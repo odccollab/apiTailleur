@@ -7,6 +7,8 @@ const postSchema = new Schema({
     type: [String], // Tableau de chaînes de caractères
     default: [],    // Par défaut, un tableau vide
   },
+
+
   comments: [
     {
       text :String,
@@ -32,18 +34,14 @@ const postSchema = new Schema({
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
+ 
   signale: [
       {
         motif: String,
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
-<<<<<<< HEAD
-=======
- 
-  
->>>>>>> bf354c3 (fonctionnalité message et partage sur la nouvelle branche)
-
+viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],

@@ -23,7 +23,6 @@ router.post('/messages', Middleware.test, UserController.sendMessage);
 router.get('/messages/search', Middleware.test, UserController.searchMessages);
 
 // Vous pouvez ajouter d'autres routes ici
-
 // router.get('/', UserController.getAllPosts);
 // router.post('/login', UserController.login);
 // router.post('/register', UserController.register);
