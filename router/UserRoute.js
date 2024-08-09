@@ -12,6 +12,9 @@ router.get('/email/:email',UserController.findUserByEmail);
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/login',Middleware.Validate,UserController.loginUser);
+router.post('/follow',verifyToken(), UserController.addFollower);
+router.get('/followers', verifyToken(),UserController.getFollowers);
+router.get('/followings',verifyToken(),UserController.getFollowings);
  router.post('/create',Validator("register"),  UserController2.createUser);
  router.post('/achatCredit', MiddlewareToken(), UserController.rechargerCompte);
  router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
