@@ -1,9 +1,10 @@
 const postSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
   contenu: String,
-  contenuMedia:[
-          {url :strings}
-      ],
+  contenuMedia: {
+    type: [String], // Tableau de chaînes de caractères
+    default: [],    // Par défaut, un tableau vide
+  },
   comments: [
     {
       text :string,
@@ -29,6 +30,7 @@ const postSchema = new Schema({
         idLikerD: { type: Schema.Types.ObjectId, ref: 'User' }
       }
     ],
+ 
   signale: [
       {
         motif: String,
@@ -36,6 +38,7 @@ const postSchema = new Schema({
       }
     ],
 
+viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
   viewersIds: [{ type: Schema.Types.ObjectId, ref: 'User' }],

@@ -23,7 +23,7 @@ class UserController {
     }
     password = UserController.hashPassword(password);
     try {
-      const user = await UserModel.create({
+      const user = await User.create({
         nom,
         prenom,
         role,
@@ -71,12 +71,22 @@ class UserController {
 
   static async loginUser(req, res) {
     const { mail, password } = req.body;
+    // console.log(password);
+    
+    if (!mail ||!password) {
+      return res.status(400).json({ message: 'Please provide both email and password' });
+    }
     try {
       const user = await User.findOne({ mail });
+      // console.log(user);
+      
       if (!user || !Utils.compPass(password, user.password)) {
+        
         return res.status(400).json({ message: 'Invalid credentials',password: Utils.compPass(password, user.password) });
       }
-      const token = jwt.sign({ id: user._id,role:user.role }, process.env.SECRET_KEY, {
+const SECRET_KEY ="d,fhjdhfjesrgfjshwgjfhugseyruyfqusdfkjqsdhfLIqdfslqsdhflqshkdfghkqsdhfkqhdSDGHSGDHGSHDHHSGDHSGDHGSHCHSGDH12345678908765432345"
+
+      const token = jwt.sign({ id: user._id,role:user.role }, SECRET_KEY, {
         expiresIn: '7h',
       });
       res.json({success:"connected", token });
@@ -124,6 +134,7 @@ class UserController {
     const userId = req.id; 
 
     try {
+
         const userToFollow = await User.findById(id);  // Utilisateur à suivre
 
         if (!userToFollow) {

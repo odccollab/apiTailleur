@@ -33,7 +33,7 @@ export default class UserController2 {
             });
             res.json(user);
         } catch (err) {
-            console.error(err.message);
+            console.error(err);
             res.status(500).send('Erreur du serveur');
     }
    
