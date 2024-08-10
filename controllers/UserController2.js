@@ -139,5 +139,5 @@ export default class UserController2 {
       res.status(500).send('Erreur du serveur');
     }
   }
-    
+  
 }
