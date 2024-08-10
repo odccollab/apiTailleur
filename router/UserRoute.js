@@ -12,15 +12,15 @@ router.get('/email/:email',UserController.findUserByEmail);
 router.get('/email',Middleware.test,Middleware.whoru, UserController.findUserByEmail2);
 router.post('/login2',Validator("login"), UserController.loginUser);
  router.post('/login',Middleware.Validate,UserController.loginUser);
-router.post('/follow',verifyToken(), UserController.addFollower);
-router.get('/followers', verifyToken(),UserController.getFollowers);
-router.get('/followings',verifyToken(),UserController.getFollowings);
+router.post('/follow',MiddlewareToken(), UserController.addFollower);
+router.get('/followers', MiddlewareToken(),UserController.getFollowers);
+router.get('/followings',MiddlewareToken(),UserController.getFollowings);
  router.post('/create',Validator("register"),  UserController2.createUser);
  router.post('/achatCredit', MiddlewareToken(), UserController.rechargerCompte);
  router.post('/modifyProfile', MiddlewareToken(), UserController.ChangeEnTailleur)
-router.post('/favorite',token(), UserController2.manageFavorites);
-router.get('/favorite',token(), UserController2.getUserFavorites);
-router.post('/vote',token(), UserController2.manageVotes);
+router.post('/favorite',MiddlewareToken(), UserController2.manageFavorites);
+router.get('/favorite',MiddlewareToken(), UserController2.getUserFavorites);
+router.post('/vote',MiddlewareToken(), UserController2.manageVotes);
 
 router.get('/messages', Middleware.test, UserController.getMessages);
 // router.get('/messages/:userId', Middleware.test, UserController.getMessagesByUserId);
