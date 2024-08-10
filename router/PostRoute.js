@@ -29,12 +29,12 @@ router.get('/:postId/comment', postController.getComments);
 
 // Nouvelles routes pour les vues
 // router.post('/:postId/view', ViewController.incrementViews);
-router.post('/:postId/view/:userId',verifyToken(), postController.incrementViews);
+router.get('/:postId/view',verifyToken(), postController.incrementViews);
 router.get('/:postId/views',verifyToken(), PostController.getViews);
 router.get('/create', validateData("post"), PostController.createPost);
 
 router.delete('/:postId/comment/:commentId', PostController.deleteComment);
-router.put('/:postId/comment/:commentId', PostController.updateComment);
+router.put('/:postId/comment/:commentId',validateData('comment'), PostController.updateComment);
 
 
 
@@ -53,6 +53,6 @@ router.post('/share', PostController.sharePost);
 router.post('/share/email', PostController.shareByEmail);
 router.post('/share/facebook', PostController.shareOnFacebook);
 router.post('/share/whatsapp', PostController.shareOnWhatsApp);
- router.post('/signale',verifyToken(), PostController.signalPost);
+ router.post('/signale',MiddlewareToken(), PostController.signalPost);
  router.get('/find', PostController.findUserOrPost);
 export default router;
