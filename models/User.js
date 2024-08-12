@@ -46,7 +46,7 @@ const userSchema = new Schema({
   prenom: String,
   type: String,
   password: String,
-  telephone: { type: Number, unique: true },
+  telephone: { type: String, unique: true },
   mail: { type: String, unique: true },
   votes: [
     {
