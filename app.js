@@ -7,11 +7,11 @@ import dotenv from 'dotenv';
 import './middlewares/cront.js';
 import swaggerSetup from './swagger.js'
 
-import http from 'http';
+
 import userRoutes from './router/UserRoute.js';
 // import messageRoutes from './router/MessageRoute.js';
 // import setupSocket from './socket/socket.js';
-import { Server } from 'socket.io';
+
 
 dotenv.config();
 const app = express();
@@ -21,12 +21,7 @@ app.use(bodyParser.json());
 connectDB;
 
 
-const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: '*',
-  }
-});
+
 app.use(express.json());
 app.use("/posts",postRoute);
 app.use("/users",userRoute);
